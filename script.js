@@ -26,10 +26,40 @@ let models = [
   },
 ];
 
-index = 1;
+let index = 0;
+let slideCount = models.length;
+
+showSlide(index);
 
 document
-  .querySelector(".card-img-top")
-  .setAttribute("src", models[index].image);
-document.querySelector(".card-title").textContent = models[index].name;
-document.querySelector(".card-link").setAttribute("href", models[index].link);
+  .querySelector(".fa-arrow-circle-left")
+  .addEventListener("click", function () {
+    index--;
+    showSlide(index);
+    console.log(index);
+  });
+
+document
+  .querySelector(".fa-arrow-circle-right")
+  .addEventListener("click", function () {
+    index++;
+    showSlide(index);
+    console.log(index);
+  });
+
+function showSlide(i) {
+  index = i;
+
+  if (i < 0) {
+    index = slideCount - 1;
+  }
+  if (i >= slideCount) {
+    index = 0;
+  }
+
+  document
+    .querySelector(".card-img-top")
+    .setAttribute("src", models[index].image);
+  document.querySelector(".card-title").textContent = models[index].name;
+  document.querySelector(".card-link").setAttribute("href", models[index].link);
+}
